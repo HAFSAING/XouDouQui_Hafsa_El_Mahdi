@@ -1,8 +1,5 @@
 package jungle;
 
-/**
- * VERSION DE DÉBOGAGE - NE PAS GARDER EN VERSION FINALE
- */
 public class Game {
 
     private final Board board;
@@ -24,7 +21,6 @@ public class Game {
     }
 
     public boolean makeMove(int fromRow, int fromCol, int toRow, int toCol) {
-        // Affiche le début de la tentative de mouvement
         System.out.println("\n--- Tentative de mouvement : " + (char)('A' + fromCol) + fromRow + " -> " + (char)('A' + toCol) + toRow + " par " + currentPlayer.getUsername() + " ---");
         
         if (!isValidMove(fromRow, fromCol, toRow, toCol)) {
@@ -49,7 +45,6 @@ public class Game {
     private boolean isValidMove(int fromRow, int fromCol, int toRow, int toCol) {
         System.out.println("  [Validation] Début de la vérification...");
 
-        // Étape 1 : Vérifications de base
         if (fromRow < 0 || fromRow >= Board.ROWS || fromCol < 0 || fromCol >= Board.COLS ||
             toRow < 0 || toRow >= Board.ROWS || toCol < 0 || toCol >= Board.COLS) {
             System.out.println("  [FAIL] Coordonnées hors du plateau.");
@@ -92,7 +87,6 @@ public class Game {
         int colDiff = Math.abs(fromCol - toCol);
 
         if (animal == Animal.LION || animal == Animal.TIGRE) {
-            // Logique de saut...
         }
 
         boolean isSimpleMove = (rowDiff == 1 && colDiff == 0) || (rowDiff == 0 && colDiff == 1);
@@ -114,7 +108,6 @@ public class Game {
         System.out.println("  [FAIL] Le mouvement n'est ni un saut valide, ni un mouvement simple.");
         return false;
     }
-    // Dans Game.java
 public void setWinner(Player winner) {
     this.winner = winner;
     this.isGameOver = true;
@@ -125,11 +118,9 @@ public void setWinner(Player winner) {
             System.out.println("    [Vérif. Capture] Case vide. Mouvement autorisé.");
             return true;
         }
-        // ... (le reste de la logique de capture)
         return true; // Simplifié pour le test
     }
     
-    // Assurez-vous d'avoir le reste de vos méthodes ici
     private boolean isWinConditionMet(Square destination) {
         if (destination.getType() == Square.SquareType.SANCTUAIRE) {
             Player opponent = (currentPlayer == player1) ? player2 : player1;
