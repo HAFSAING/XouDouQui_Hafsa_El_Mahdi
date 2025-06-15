@@ -1,9 +1,6 @@
 package jungle;
 
-/**
- * Énumération représentant les types de pièces (animaux) et leur hiérarchie.
- * Le rang 8 est le plus fort (Éléphant) et le rang 1 le plus faible (Rat).
- */
+
 public enum Animal {
     ELEPHANT("Elephant", 8),
     LION("Lion", 7),
