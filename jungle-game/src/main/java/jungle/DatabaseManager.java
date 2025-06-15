@@ -11,41 +11,31 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Manages all interactions with the SQLite database.
- * WARNING: This version saves the database to the 'target/classes/jungle' directory.
- * This directory is DELETED every time you run 'mvn clean'.
- * All saved player data will be lost when 'mvn clean' is used.
- */
+
 public class DatabaseManager {
 
     private static final String DB_FILENAME = "jungle_game.db";
     private static final String DB_URL;
 
-    // This special block runs only once when the class is loaded.
-    // It will set up the database path correctly.
+
     static {
         String tempUrl;
         try {
-            // 1. Get the path to the root of the classpath (e.g., target/classes/)
             URL resourceUrl = DatabaseManager.class.getResource("/");
             if (resourceUrl == null) {
                 throw new IllegalStateException("Cannot find classpath root resource '/'");
             }
 
-            // 2. Define the path to the 'jungle' subdirectory within the classpath root.
             File jungleDir = new File(Paths.get(resourceUrl.toURI()).toFile(), "jungle");
-            
-            // 3. IMPORTANT: Create the 'jungle' directory if it does not exist.
+
             if (!jungleDir.exists()) {
                 System.out.println("Creating directory: " + jungleDir.getAbsolutePath());
-                boolean created = jungleDir.mkdirs(); // mkdirs() creates parent directories if needed.
+                boolean created = jungleDir.mkdirs(); 
                 if(!created){
                      throw new IllegalStateException("Could not create directory: " + jungleDir.getAbsolutePath());
                 }
             }
 
-            // 4. Define the full path to the database file inside the 'jungle' directory.
             File dbFile = new File(jungleDir, DB_FILENAME);
             tempUrl = "jdbc:sqlite:" + dbFile.getAbsolutePath();
 
@@ -54,11 +44,10 @@ public class DatabaseManager {
         }
         
         DB_URL = tempUrl;
-        System.out.println("Database path is set to: " + DB_URL); // For debugging
+        System.out.println("Database path is set to: " + DB_URL); 
     }
 
     public DatabaseManager() {
-        // This code ensures the 'players' table is created inside our new DB file.
         try (Connection conn = DriverManager.getConnection(DB_URL);
              Statement stmt = conn.createStatement()) {
 
@@ -78,8 +67,6 @@ public class DatabaseManager {
         }
     }
 
-    // All other methods (createPlayer, loginPlayer, etc.) remain exactly the same.
-    // They will now use the new DB_URL.
 
     public boolean createPlayer(String username, String password) {
         String sql = "INSERT INTO players(username, password) VALUES(?,?)";
