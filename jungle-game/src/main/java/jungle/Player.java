@@ -1,14 +1,11 @@
 package jungle;
 
-/**
- * Représente un compte joueur.
- * Stocke l'identifiant (essentiel pour la base de données), le nom d'utilisateur et les statistiques.
- */
+
 public class Player {
 
     private int id;
     private final String username;
-    // Note: Storing password as plain text is insecure. This is simplified for the project.
+   
     private final String password;
     private int wins;
     private int losses;
