@@ -1,6 +1,4 @@
 package jungle;
-
-
 public enum Animal {
     ELEPHANT("Elephant", 8),
     LION("Lion", 7),
@@ -10,7 +8,6 @@ public enum Animal {
     LOUP("Loup", 3),
     CHAT("Chat", 2),
     RAT("Rat", 1);
-
     private final String name;
     private final int rank;
 
